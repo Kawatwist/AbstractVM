@@ -6,12 +6,12 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 21:24:27 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/15 15:11:49 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/15 18:01:58 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "IOperand.Class.hpp"
-#include "Stack.Class.hpp"
+#include "Operator.Class.hpp"
+
 #include <list>
 
 void    randpush(std::list<std::string> & type, std::list<std::string> & value)
@@ -24,19 +24,18 @@ void    randpush(std::list<std::string> & type, std::list<std::string> & value)
 
 int main(int argc, char **argv)
 {
-    int b = 5;
-    void * a = &(b);
-    
-    OperatorC oper(a, OP_INT8);
     std::list<std::string> type;
     std::list<std::string> value;
     
     for (int i=0; i < 10; i++)
         randpush(type, value);
+        
+    MasterOperator oper;
     try
     {
         for (int i=0; i < 10; i++)
             oper.OP_push(type.front(), value.front());
+
         // oper.OP_push(OP_INT8, 33);
         // oper.OP_add();
         // oper.OP_push(OP_FLOAT, 44.55);
@@ -46,10 +45,11 @@ int main(int argc, char **argv)
         // oper.OP_dump();
         // oper.OP_pop();
         // oper.OP_assert(OP_FLOAT, 42.42);
+        
         oper.OP_exit();
         
         if (oper.HasBeenExit() == false)
-            throw OperatorC::StackException(NoExit);
+            throw MasterOperator::StackException(NoExit);
     }
     catch (std::exception & e)
     {

@@ -2,9 +2,10 @@
 # define IOPERAND_HPP
 
 #include <string>
+#include <list>
 #include <iostream>
 
-enum eOperandType { OP_INT8, OP_INT16 , OP_INT32 , OP_FLOAT, OP_DOUBLE};
+enum eOperandType { Int8Class, Int16Class , Int32Class , FloatClass, DoubleClass};
 
 class IOperand {
     public:
