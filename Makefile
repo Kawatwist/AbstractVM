@@ -1,2 +1,2 @@
 all :
-	clang++ *.cpp
+	clang++ *.cpp -std=c++11

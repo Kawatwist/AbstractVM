@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+enum eOperandType { OP_INT8, OP_INT16 , OP_INT32 , OP_FLOAT, OP_DOUBLE};
+
 class IOperand {
     public:
         virtual int             getPrecision(void)const= 0;
