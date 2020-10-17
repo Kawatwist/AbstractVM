@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 17:25:47 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/17 19:33:45 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include "IOperand.Class.hpp"
 #include <list>
 #include <limits>
-#include <maps>
-
-std::maps function;
+#include <map>
 
 typedef enum ExceptionStack
 {
@@ -33,25 +31,41 @@ typedef enum ExceptionStack
         ArithmeticError = 8,
 }       t_ExceptionStack;
 
+/* Opcode */
+        
+void            OP_push(const IOperand* toPush);
+void            OP_pop(const IOperand*);
+void            OP_dump(const IOperand*);
+void            OP_assert(const IOperand* toCmp);
+void            OP_add(const IOperand*);
+void            OP_sub(const IOperand*);
+void            OP_mul(const IOperand*);
+void            OP_div(const IOperand*);
+void            OP_mod(const IOperand*);
+void            OP_print(const IOperand*);
+void            OP_exit(const IOperand*);
+
+static std::map<std::string, void (*)(const IOperand*)> function_map =
+{
+    {"push", &OP_push},
+    {"pop", &OP_pop},
+    {"dump", &OP_dump},
+    {"assert", &OP_assert},
+    {"add", &OP_add},
+    {"sub", &OP_sub},
+    {"mul", &OP_mul},
+    {"div", &OP_div},
+    {"mod", &OP_mod},
+    {"print", &OP_print},
+    {"exit", &OP_exit}
+};
+
 class MasterOperator
 {
     public :    
         void		    CanOperate(void);
         bool		    HasBeenExit(void)		const;
 
-        /* Opcode */
-        void            OP_push(const IOperand* toPush);
-        void            OP_pop(const IOperand*);
-        void            OP_dump(const IOperand*);
-        void            OP_assert(const IOperand* toCmp);
-        void            OP_add(const IOperand*);
-        void            OP_sub(const IOperand*);
-        void            OP_mul(const IOperand*);
-        void            OP_div(const IOperand*);
-        void            OP_mod(const IOperand*);
-        void            OP_print(const IOperand*);
-        void            OP_exit(const IOperand*);
-        
         /* Exception */
         class StackException : public std::exception
         {
@@ -66,7 +80,6 @@ class MasterOperator
                     "ArithmeticWithLessThan2"};
                 int _Error;
         };
-    private :
         bool                        exited = false;
         std::list<IOperand const *> _list;
 };

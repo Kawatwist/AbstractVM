@@ -1,40 +1,25 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/13 21:24:27 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 17:17:27 by lomasse          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "./Includes/MasterOperator.Class.hpp"
-#include "./Includes/TypeOperator.Class.hpp"
+#include "Lexer.hpp"
 #include "./Includes/FactoryOperator.Class.hpp"
+#include "./Includes/TypeOperator.Class.hpp"
+#include "./Includes/MasterOperator.Class.hpp"
 
-FactoryOperator Factory;
-MasterOperator Manager;
+FactoryOperator  Factory;
+MasterOperator   Manager;
+int  tree_flg = 0;
+int  l_flg = 0;
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-    try
-    {
-        Manager.OP_push(Factory.CreateType(std::string("int8"), std::string("5")));
-        Manager.OP_push(Factory.CreateType(std::string("float"), std::string("4.35")));
-        Manager.OP_assert(Factory.CreateType(std::string("float"), std::string("4.35")));
-        Manager.OP_add();
-        Manager.OP_push(Factory.CreateType(std::string("int8"), std::string("4")));
-        Manager.OP_mod();
-        Manager.OP_dump();
-        // Manager.OP_exit();
-        if (Manager.HasBeenExit() == false)
-            throw MasterOperator::StackException(NoExit);
-    }
-    catch (std::exception & e)
-    {
-        std::cout << "Exception Occurs : " << e.what() << std::endl;
-    }
+    int     i;
+
+    i = 1;
+    (void)ac;
+    if (av[i] && strcmp(av[i], "--tree") == 0)
+        tree_flg = i++;
+    if (av[i] && strcmp(av[i], "-l") == 0)
+        l_flg = i++;
+    Lexer lex(av[i]);
+    lex.launchManager();
+    
     return (0);
 }

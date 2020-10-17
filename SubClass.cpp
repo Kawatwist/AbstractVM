@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:00:19 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 17:10:38 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/17 19:35:04 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "./Includes/MasterOperator.Class.hpp"
 
 extern FactoryOperator Factory;
-extern MasterOperator Manager;
 
 IOperand const *FactoryOperator::CreateType( std::string type, std::string value)
 {
@@ -109,7 +108,6 @@ eOperandType    FormalizeType::getType(void) const
 	return (eOperandType::Int8);
 }
 
-
 /*
 **  IOperand Function
 */
@@ -155,6 +153,6 @@ IOperand const *FormalizeType::operator%( IOperand const& rhs ) const
 	if (std::stod(rhs.toString()) == 0)
 		throw MasterOperator::StackException(ByZero);
 	adds << (std::stod(this->toString()) - (std::stod(this->toString()) / std::stod(rhs.toString())));
-	std::cout << "Modulo :" << (std::stod(this->toString()) - (std::stod(this->toString()) / std::stod(rhs.toString()))) << std::endl;
+	// std::cout << "Modulo :" << (std::stod(this->toString()) - (std::stod(this->toString()) / std::stod(rhs.toString()))) << std::endl;
 	return (Factory.CreateType(type, adds.str()));
 }
