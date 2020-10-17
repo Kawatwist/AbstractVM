@@ -5,7 +5,7 @@
 #include <list>
 #include <iostream>
 
-enum eOperandType { Int8Class, Int16Class , Int32Class , FloatClass, DoubleClass};
+enum eOperandType { Int8, Int16, Int32, Float, Double};
 
 class IOperand {
     public:

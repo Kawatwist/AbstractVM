@@ -31,7 +31,7 @@ error = {
     'overflow int16': 'push int16(32768)',
     'overflow int32': 'push int32(2147483648)',
     'pop on empty stack': 'pop',
-    'assert equal': 'push int8(8)\nassert 8',
+    'assert not equal': 'push int8(8)\nassert 7',
     'assert empty': 'assert 0',
     'div by 0': 'push int8(8)\npush int8(0)\n div',
     'mod by 0': 'push int8(8)\npush int8(0)\n mod',

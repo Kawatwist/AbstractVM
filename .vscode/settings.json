@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "map": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "regex": "cpp",
+        "__functional_base_03": "cpp",
+        "filesystem": "cpp"
+    }
+}

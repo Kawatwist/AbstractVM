@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Operator.Class.hpp                                 :+:      :+:    :+:   */
+/*   MasterOperator.Class.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/15 18:00:48 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/17 19:33:45 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATOR_CLASS_HPP
-# define OPERATOR_CLASS_HPP
+#ifndef MASTEROPERATOR_CLASS_HPP
+# define MASTEROPERATOR_CLASS_HPP
 
 #include "IOperand.Class.hpp"
+#include <list>
+#include <limits>
+#include <map>
 
 typedef enum ExceptionStack
 {
@@ -28,44 +31,41 @@ typedef enum ExceptionStack
         ArithmeticError = 8,
 }       t_ExceptionStack;
 
-class Operand : public IOperand
-{
-    public :
-        void            print_content(void) const;
-        int             getPrecision(void)      const;
-        eOperandType    getType(void)           const;
-        std::string const & toString(void)      const;
+/* Opcode */
         
-        /* Operator */
-        IOperand const *operator+( IOperand const & rhs ) const;
-        IOperand const *operator-( IOperand const & rhs ) const;
-        IOperand const *operator*( IOperand const & rhs ) const;
-        IOperand const *operator/( IOperand const & rhs ) const;
-        IOperand const *operator%( IOperand const & rhs ) const;
+void            OP_push(const IOperand* toPush);
+void            OP_pop(const IOperand*);
+void            OP_dump(const IOperand*);
+void            OP_assert(const IOperand* toCmp);
+void            OP_add(const IOperand*);
+void            OP_sub(const IOperand*);
+void            OP_mul(const IOperand*);
+void            OP_div(const IOperand*);
+void            OP_mod(const IOperand*);
+void            OP_print(const IOperand*);
+void            OP_exit(const IOperand*);
+
+static std::map<std::string, void (*)(const IOperand*)> function_map =
+{
+    {"push", &OP_push},
+    {"pop", &OP_pop},
+    {"dump", &OP_dump},
+    {"assert", &OP_assert},
+    {"add", &OP_add},
+    {"sub", &OP_sub},
+    {"mul", &OP_mul},
+    {"div", &OP_div},
+    {"mod", &OP_mod},
+    {"print", &OP_print},
+    {"exit", &OP_exit}
 };
 
 class MasterOperator
 {
-    private :
-        std::list<Operand>     _list;
     public :    
         void		    CanOperate(void);
         bool		    HasBeenExit(void)		const;
 
-        /* Opcode */
-        void            OP_push(std::string type, std::string value);
-        void            OP_pop(void);
-        void            OP_dump(void) const;
-        void            OP_assert(std::string type, std::string value);
-        void            OP_add(void);
-        void            OP_sub(void);
-        void            OP_mul(void);
-        void            OP_div(void);
-        void            OP_mod(void);
-        void            OP_print(void);
-        void            OP_exit(void);
-
-        
         /* Exception */
         class StackException : public std::exception
         {
@@ -80,6 +80,8 @@ class MasterOperator
                     "ArithmeticWithLessThan2"};
                 int _Error;
         };
+        bool                        exited = false;
+        std::list<IOperand const *> _list;
 };
 
 #endif

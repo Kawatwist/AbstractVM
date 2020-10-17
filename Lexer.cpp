@@ -1,5 +1,11 @@
 #include "Lexer.hpp"
+#include <map>
+#include "./Includes/FactoryOperator.Class.hpp"
+#include "./Includes/TypeOperator.Class.hpp"
+#include "./Includes/MasterOperator.Class.hpp"
 
+extern FactoryOperator  Factory;
+extern MasterOperator   Manager;
 extern int tree_flg;
 extern int l_flg;
 
@@ -239,12 +245,29 @@ void    Lexer::deleteTree(Token *start)
     delete start;
 }
 
-void    Lexer::launchManager() const
+void    Lexer::launchManager()
 {
+    const IOperand * op;
     for (auto v : this->_lst)
     {
-        // IOperand * const op = CreateType(v->getTree(1), v->getTree(0));
-
+        if (v->type == COMMENT)
+            continue ;
+        try
+        {
+            if (!v->tok.compare("push") || !v->tok.compare("assert"))
+            {
+                v->getTree(0)->tok = v->getTree(0)->tok.substr(1, v->getTree(0)->tok.size() - 2);
+                op = Factory.CreateType(v->getTree(1)->tok, v->getTree(0)->tok);
+            }
+            else
+                op = NULL;
+            function_map[v->tok] (op);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            break ;
+        }
     }
 }
 
