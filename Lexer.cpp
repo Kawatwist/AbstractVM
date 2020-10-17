@@ -204,7 +204,7 @@ void    Lexer::identifier(Token *curr) const
         throw SyntacticException();
     if (!opValid(curr->tok))
         throw SyntacticException();
-    if (!strcmp("push", curr->tok.c_str()))
+    if (!strcmp("push", curr->tok.c_str()) || !strcmp("assert", curr->tok.c_str()))
     {
         if (!curr->getTree(1))
             throw LexicalException();
@@ -217,13 +217,19 @@ void    Lexer::identifier(Token *curr) const
         if (!std::regex_match (curr->getTree(0)->tok.substr(1, curr->getTree(0)->tok.size() - 2), std::regex("[-]?([0-9]+([.][0-9]*)?|[.][0-9]+)") ))
             throw LexicalException();
     }
-    if (!strcmp("assert", curr->tok.c_str()))
-    {
-        if (!curr->getTree(1))
-            throw LexicalException();
-        if (!std::regex_match (curr->getTree(1)->tok, std::regex("[-]?([0-9]*)") ))
-            throw LexicalException();
-    }
+    // if (!strcmp("assert", curr->tok.c_str()))
+    // {
+    //     if (!curr->getTree(1))
+    //         throw LexicalException();
+    //     if (!opFuncs(curr->getTree(1)->tok))
+    //         throw LexicalException();
+    //     if (!curr->getTree(0) || curr->getTree(0)->getTree(0))
+    //         throw SyntacticException();
+    //     if (curr->getTree(0)->tok.at(0) != '(' || curr->getTree(0)->tok.back() != ')')
+    //         throw SyntacticException();
+    //     if (!std::regex_match (curr->getTree(0)->tok.substr(1, curr->getTree(0)->tok.size() - 2), std::regex("[-]?([0-9]+([.][0-9]*)?|[.][0-9]+)") ))
+    //         throw LexicalException();
+    // }
 }
 
 void    Lexer::deleteTree(Token *start)
