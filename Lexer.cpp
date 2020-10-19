@@ -244,11 +244,11 @@ int    Lexer::launchManager()
         try
         {
             if (c_flg)
-                std::cout << MAGENTA << v->tok << " ";
+                std::cout << MAGENTA << v->tok << " " << WHITE ;
             if (!v->tok.compare("push") || !v->tok.compare("assert"))
             {
                 if (c_flg)
-                    std::cout << MAGENTA << v->getTree(1)->tok << " " << v->getTree(0)->tok;
+                    std::cout << MAGENTA << v->getTree(1)->tok << " " << v->getTree(0)->tok << WHITE;
                 v->getTree(0)->tok = v->getTree(0)->tok.substr(1, v->getTree(0)->tok.size() - 2);
                 op = Factory.createOperand(Factory.convertType(v->getTree(1)->tok), v->getTree(0)->tok);
             }
@@ -260,8 +260,16 @@ int    Lexer::launchManager()
         }
         catch(const std::exception& e)
         {
+            if (c_flg)
+                std::cout << RED << std::endl;
             std::cerr << e.what() << '\n';
             return (1);
+        }
+        while (!Manager._list.empty())
+        {
+            auto curr = Manager._list.front();
+            Manager._list.pop_front();
+            delete curr;
         }
     }
     return (0);

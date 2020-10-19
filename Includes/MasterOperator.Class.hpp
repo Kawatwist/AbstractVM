@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/19 15:38:42 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 15:42:59 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "IOperand.Class.hpp"
 #define MAGENTA     "\x1b[35m"
+#define RED   "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define WHITE   "\x1b[0m"
 #include <list>
