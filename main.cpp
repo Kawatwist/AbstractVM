@@ -19,7 +19,5 @@ int main(int ac, char **av)
     if (av[i] && strcmp(av[i], "-l") == 0)
         l_flg = i++;
     Lexer lex(av[i]);
-    lex.launchManager();
-    
-    return (0);
+    return (lex.launchManager());
 }

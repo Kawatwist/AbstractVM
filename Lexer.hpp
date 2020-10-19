@@ -22,7 +22,7 @@ class Lexer
         void    identifier(Token *curr) const;
         bool    opFuncs(std::string & params) const;
         void    deleteTree(Token *start);
-        void    launchManager();
+        int    launchManager();
         ~Lexer();
 
 
