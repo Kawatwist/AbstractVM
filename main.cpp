@@ -7,6 +7,7 @@ FactoryOperator  Factory;
 MasterOperator   Manager;
 int  tree_flg = 0;
 int  l_flg = 0;
+int  c_flg = 0;
 
 int main(int ac, char **av)
 {
@@ -18,6 +19,8 @@ int main(int ac, char **av)
         tree_flg = i++;
     if (av[i] && strcmp(av[i], "-l") == 0)
         l_flg = i++;
+    if (av[i] && strcmp(av[i], "-c") == 0)
+        c_flg = i++;
     Lexer lex(av[i]);
     return (lex.launchManager());
 }

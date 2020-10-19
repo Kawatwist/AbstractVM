@@ -1,0 +1,5 @@
+push float(323.3200)
+push int16(160)
+div
+dump
+exit
