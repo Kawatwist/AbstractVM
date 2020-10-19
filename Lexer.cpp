@@ -180,8 +180,8 @@ bool    Lexer::opValid(std::string & op) const
 {
     static const char *tab[] = {"push", "pop",
         "dump", "assert", "add", "sub",
-        "mul", "div", "mod", "print", "exit"
-    };
+        "mul", "div", "mod", "print", "exit", "printf"
+    }; // Add PrintF
 
     for (size_t i = 0; i < sizeof(tab) / sizeof(tab[0]); i++)
     {
@@ -262,15 +262,15 @@ int    Lexer::launchManager()
         {
             if (c_flg)
                 std::cout << RED << std::endl;
-            std::cerr << e.what() << '\n';
+            std::cerr << e.what() << WHITE << std::endl;
             return (1);
         }
-        while (!Manager._list.empty())
-        {
-            auto curr = Manager._list.front();
-            Manager._list.pop_front();
-            delete curr;
-        }
+    }
+    while (!Manager._list.empty())
+    {
+        auto curr = Manager._list.front();
+        Manager._list.pop_front();
+        delete curr;
     }
     return (0);
 }

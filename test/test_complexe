@@ -1,0 +1,141 @@
+; print HelloWorld
+push int8(100) ; d
+push int8(108) ; l
+push int8(114) ; r
+push int8(111) ; o
+push int8(119) ; h
+push int8(32) ; Maj
+push int8(32) ; Space
+push int8(111) ; o
+push int8(108) ; l
+push int8(108) ; l
+push int8(101) ; e
+push int8(104) ; h
+; Set Maj
+push int8(32)
+sub
+assert int8(72)
+print
+pop
+print
+pop
+print
+pop
+print
+pop
+print
+pop
+print
+pop
+sub
+assert int8(87)
+print
+pop
+print
+pop
+print
+pop
+print
+pop
+print
+pop
+; Test
+push int8(12)
+print
+pop
+push int8(84) ; T
+print
+push int8(17) ; Padding T => e
+add
+print
+push int8(14) ; Padding e => s
+add
+print
+push int8(1) ; Padding s => t
+add
+print
+push int8(58) ; :
+print
+pop
+push int8(106) ; t => \n
+sub
+print
+pop
+push float(5.0)
+push int8(50) ; 2
+push int8(67) ; C
+push int8(50) ; 2
+push int8(66) ; B
+push int8(50) ; 2
+push int8(65) ; A
+print
+pop
+print ; A2
+push int8(32)
+print
+pop
+push int8(61) ; =
+print
+pop
+push int8(32)
+print
+pop
+pop
+assert int8(66) ; B
+print
+pop
+print
+pop
+push int8(43) ; +
+print
+pop
+print
+pop
+print
+pop
+push int8(10) ; \n
+print
+pop
+push float(5) ; 5 * 5 
+mul
+printf
+pop
+push int8(32)
+print
+pop
+push int8(61) ; =
+print
+pop
+push int8(32)
+print
+pop
+push float(4) ;
+push float(4) ; 4 * 4 
+mul
+printf
+pop
+push int8(43) ; +
+print
+pop
+push float(3) ;
+push float(3) ; 3 * 3 
+mul
+printf
+pop
+;Stack Clear
+push int8(10) ; \n
+print
+pop
+push int8(54) ; C => y
+push int8(67) ; C
+print
+add
+print
+push int8(24) ; y => a
+sub
+print
+pop
+push int8(10) ; \n
+print
+pop
+exit

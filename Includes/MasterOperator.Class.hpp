@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/19 15:42:59 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 16:59:11 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef enum ExceptionStack
         AssertNotTrue = 7,
         ArithmeticError = 8,
         PrintNonAscii = 9,
+        PrintNonFloat = 9,
 }       t_ExceptionStack;
 
 /* Opcode */
-        
+
 void            OP_push(const IOperand* toPush);
 void            OP_pop(const IOperand*);
 void            OP_dump(const IOperand*);
@@ -48,6 +49,7 @@ void            OP_mul(const IOperand*);
 void            OP_div(const IOperand*);
 void            OP_mod(const IOperand*);
 void            OP_print(const IOperand*);
+void            OP_printf(const IOperand*);
 void            OP_exit(const IOperand*);
 
 static std::map<std::string, void (*)(const IOperand*)> function_map =
@@ -62,6 +64,7 @@ static std::map<std::string, void (*)(const IOperand*)> function_map =
     {"div", &OP_div},
     {"mod", &OP_mod},
     {"print", &OP_print},
+    {"printf", &OP_printf},
     {"exit", &OP_exit}
 };
 
@@ -78,11 +81,11 @@ class MasterOperator
                 StackException(int n) : _Error(n) {};
                 virtual const char * what() const throw() {return (this->tab[this->_Error]);};
             private :
-                const char tab[10][25] = {"EmptyStack", "StackException",
+                const char tab[11][25] = {"EmptyStack", "StackException",
                     "OverFlowValue", "UnderFlowValue",
                     "Divide/Modulo by 0", "ProgramDontExit",
                     "UnknowInstruction", "AssertNotTrue",
-                    "ArithmeticWithLessThan2", "PrinNonAscii"};
+                    "ArithmeticWithLessThan2", "PrintNonAscii", "PrintNonFloat"};
                 int _Error;
         };
         bool                        exited = false;

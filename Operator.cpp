@@ -13,6 +13,7 @@
 #include "./Includes/MasterOperator.Class.hpp"
 #include "./Includes/FactoryOperator.Class.hpp"
 #include "./Includes/TypeOperator.Class.hpp"
+#include <iomanip>
 
 extern FactoryOperator Factory;
 extern MasterOperator Manager;
@@ -60,7 +61,7 @@ void           OP_add(const IOperand*)
 	IOperand* r = const_cast<IOperand*>(*v2 + *v1);
     OP_push(r);
     if (c_flg)
-        std::cout << GREEN << v1->toString() << " + "<< v2->toString() << " = " << r->toString() << WHITE << std::endl;
+        std::cout << GREEN << v2->toString() << " + "<< v1->toString() << " = " << r->toString() << WHITE << std::endl;
     delete v1;
     delete v2;
 }
@@ -75,7 +76,7 @@ void           OP_sub(const IOperand*)
 	IOperand* r = const_cast<IOperand*>(*v2 - *v1);
     OP_push(r);
     if (c_flg)
-        std::cout << GREEN << v1->toString() << " - " << v2->toString() << " = " << r->toString() << WHITE << std::endl;
+        std::cout << GREEN << v2->toString() << " - " << v1->toString() << " = " << r->toString() << WHITE << std::endl;
     delete v1;
     delete v2;
 }
@@ -90,7 +91,7 @@ void           OP_mul(const IOperand*)
 	IOperand* r = const_cast<IOperand*>(*v2 * *v1);
     OP_push(r);
     if (c_flg)
-        std::cout << GREEN << v1->toString() << " * " << v2->toString() << " = " << r->toString() << WHITE << std::endl;
+        std::cout << GREEN << v2->toString() << " * " << v1->toString() << " = " << r->toString() << WHITE << std::endl;
     delete v1;
     delete v2;
 }
@@ -105,7 +106,7 @@ void           OP_div(const IOperand*)
 	IOperand* r = const_cast<IOperand*>(*v2 / *v1);
     OP_push(r);
     if (c_flg)
-        std::cout << GREEN << v1->toString() << " / " << v2->toString() << " = " << r->toString() << WHITE << std::endl;
+        std::cout << GREEN << v2->toString() << " / " << v1->toString() << " = " << r->toString() << WHITE << std::endl;
     delete v1;
     delete v2;
 }
@@ -120,9 +121,24 @@ void           OP_mod(const IOperand*)
 	IOperand* r = const_cast<IOperand*>(*v2 % *v1);
     OP_push(r);
     if (c_flg)
-        std::cout << GREEN << v1->toString() << " % " << v2->toString() << " = " << r->toString() << WHITE << std::endl;
+        std::cout << GREEN << v2->toString() << " % " << v1->toString() << " = " << r->toString() << WHITE << std::endl;
     delete v1;
     delete v2;
+}
+
+void           OP_printf(const IOperand*)
+{
+    if (Manager._list.empty() == true)
+        throw (MasterOperator::StackException(EmptyStack));
+    auto current = Manager._list.front();
+    if (current->getType() >= Float)
+    {
+        std::cout << std::setprecision(current->getPrecision()) << std::stof(current->toString());
+        if (c_flg)
+            std::cout << std::endl;
+    }
+    else
+        throw (MasterOperator::StackException(PrintNonFloat));
 }
 
 void           OP_print(const IOperand*)
@@ -131,7 +147,11 @@ void           OP_print(const IOperand*)
         throw (MasterOperator::StackException(EmptyStack));
     auto current = Manager._list.front();
     if (current->getType() == Int8)
-        std::cout << static_cast<char>(std::stoi(current->toString())) << std::endl;
+    {
+        std::cout << static_cast<char>(std::stoi(current->toString()));
+        if (c_flg)
+            std::cout << std::endl;
+    }
     else
         throw (MasterOperator::StackException(PrintNonAscii));
 }
