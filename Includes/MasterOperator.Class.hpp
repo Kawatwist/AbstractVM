@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 19:33:45 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 15:38:42 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MASTEROPERATOR_CLASS_HPP
 
 #include "IOperand.Class.hpp"
+#define MAGENTA     "\x1b[35m"
+#define GREEN   "\x1b[32m"
+#define WHITE   "\x1b[0m"
 #include <list>
 #include <limits>
 #include <map>
@@ -29,6 +32,7 @@ typedef enum ExceptionStack
         UnknowInstruction = 6, 
         AssertNotTrue = 7,
         ArithmeticError = 8,
+        PrintNonAscii = 9,
 }       t_ExceptionStack;
 
 /* Opcode */
@@ -73,11 +77,11 @@ class MasterOperator
                 StackException(int n) : _Error(n) {};
                 virtual const char * what() const throw() {return (this->tab[this->_Error]);};
             private :
-                const char tab[9][25] = {"EmptyStack", "StackException",
+                const char tab[10][25] = {"EmptyStack", "StackException",
                     "OverFlowValue", "UnderFlowValue",
                     "Divide/Modulo by 0", "ProgramDontExit",
                     "UnknowInstruction", "AssertNotTrue",
-                    "ArithmeticWithLessThan2"};
+                    "ArithmeticWithLessThan2", "PrinNonAscii"};
                 int _Error;
         };
         bool                        exited = false;

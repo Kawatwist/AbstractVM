@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:47:58 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 16:54:25 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 15:01:57 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class FactoryOperator : public FormalizeType
     public:
         
         /* Type Creator */
-        IOperand const* CreateType( std::string type, std::string value);
-        IOperand const* CreateType( eOperandType type, std::string value);
+        IOperand const* createOperand( eOperandType type, std::string const & value )const;
+        eOperandType    convertType(std::string type) const;
 
         IOperand const* createInt8( std::string const   & value ) const;
         IOperand const* createInt16( std::string const  & value ) const;

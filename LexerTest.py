@@ -9,7 +9,7 @@ class color:
    BLUE = '\033[1;34;48m'
    GREEN = '\033[1;32;48m'
    YELLOW = '\033[1;33;48m'
-   RED = '\033[1;31;48m'
+   MAGENTA = '\033[1;31;48m'
    BLACK = '\033[1;30;48m'
    UNDERLINE = '\033[4;37;48m'
    END = '\033[1;37;0m'
@@ -51,5 +51,5 @@ for err, value in error.items():
     if p.returncode == 1:
         print(f'{color.BOLD}{err:22} {color.GREEN}{p.returncode:5} 👍    {color.BLACK}{cut:15}')
     else:
-        print(f'{color.BOLD}{err:22} {color.RED}{p.returncode:5} 👎    {color.BLACK}{cut:15}')
+        print(f'{color.BOLD}{err:22} {color.MAGENTA}{p.returncode:5} 👎    {color.BLACK}{cut:15}')
 

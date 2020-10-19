@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 13:58:42 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/19 14:13:12 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 15:29:25 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ class   Int8 : public FormalizeType
     public :
         Int8(int8_t Value) : value(Value) {std::ostringstream convert; convert << static_cast<int>(value); this->Svalue = convert.str();};
         ~Int8() {};
-        eOperandType    getType(void) const {return (eOperandType::Int8);};
+        eOperandType        getType(void) const {return (eOperandType::Int8);};
+        int                 getPrecision(void)      const {return (0);};
         std::string const & toString(void)      const {return (this->Svalue);};
     protected :
         int8_t          value;
@@ -50,7 +51,8 @@ class   Int16 : public FormalizeType
     public :
         Int16(int16_t Value) : value(Value) {std::ostringstream convert; convert << value;this->Svalue = convert.str();};
         ~Int16() {};
-        eOperandType    getType(void) const {return (eOperandType::Int16);};
+        eOperandType        getType(void) const {return (eOperandType::Int16);};
+        int                 getPrecision(void)      const {return (0);};
         std::string const & toString(void)      const {return (this->Svalue);};
     protected :
         int16_t         value;
@@ -63,7 +65,8 @@ class   Int32 : public FormalizeType
     public :
         Int32(int32_t Value) : value(Value) {std::ostringstream convert; convert << value;this->Svalue = convert.str();};
         ~Int32() {};
-        eOperandType    getType(void) const {return (eOperandType::Int32);};
+        eOperandType        getType(void) const {return (eOperandType::Int32);};
+        int                 getPrecision(void)      const {return (0);};
         std::string const & toString(void)      const {return (this->Svalue);};
     protected :
         int32_t         value;
@@ -76,7 +79,8 @@ class   Float : public FormalizeType
     public :
         Float(float Value) : value(Value) {std::ostringstream convert; convert << value;this->Svalue = convert.str();};
         ~Float() {};
-        eOperandType    getType(void) const {return (eOperandType::Float);};
+        eOperandType        getType(void) const {return (eOperandType::Float);};
+        int                 getPrecision(void)      const {return (7);};
         std::string const & toString(void)      const {return (this->Svalue);};
     protected :
         float           value;
@@ -89,7 +93,8 @@ class   Double : public FormalizeType
     public :
         Double(double Value) : value(Value) {std::ostringstream convert; convert << value;this->Svalue = convert.str();};
         ~Double() {};
-        eOperandType    getType(void) const {return (eOperandType::Double);};
+        eOperandType        getType(void) const {return (eOperandType::Double);};
+        int                 getPrecision(void)      const {return (14);};
         std::string const & toString(void)      const {return (this->Svalue);};
     protected :
         double          value;

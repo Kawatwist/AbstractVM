@@ -8,6 +8,7 @@ extern FactoryOperator  Factory;
 extern MasterOperator   Manager;
 extern int tree_flg;
 extern int l_flg;
+extern int  c_flg;
 
 Lexer::Lexer(const char *file) : _to(file)
 {
@@ -242,13 +243,19 @@ int    Lexer::launchManager()
             continue ;
         try
         {
+            if (c_flg)
+                std::cout << MAGENTA << v->tok << " ";
             if (!v->tok.compare("push") || !v->tok.compare("assert"))
             {
+                if (c_flg)
+                    std::cout << MAGENTA << v->getTree(1)->tok << " " << v->getTree(0)->tok;
                 v->getTree(0)->tok = v->getTree(0)->tok.substr(1, v->getTree(0)->tok.size() - 2);
-                op = Factory.CreateType(v->getTree(1)->tok, v->getTree(0)->tok);
+                op = Factory.createOperand(Factory.convertType(v->getTree(1)->tok), v->getTree(0)->tok);
             }
             else
                 op = NULL;
+            if (c_flg)
+                std::cout << WHITE << std::endl;
             function_map[v->tok] (op);
         }
         catch(const std::exception& e)
