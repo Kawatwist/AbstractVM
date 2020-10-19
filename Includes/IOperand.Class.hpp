@@ -20,7 +20,7 @@ class IOperand {
         
         virtual std::string const & toString(void) const= 0;
         
-        ~IOperand(void) {}
+        virtual ~IOperand(void) {};
 };
 
 #endif

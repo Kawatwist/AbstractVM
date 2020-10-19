@@ -6,13 +6,14 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:00:19 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/17 19:35:04 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/19 14:02:35 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Includes/FactoryOperator.Class.hpp"
 #include "./Includes/TypeOperator.Class.hpp"
 #include "./Includes/MasterOperator.Class.hpp"
+#include <limits>
 
 extern FactoryOperator Factory;
 
@@ -43,33 +44,66 @@ IOperand const *FactoryOperator::CreateType( eOperandType type, std::string valu
 }
 
 
+// template <typename T>
+// void			CheckFlowInt(T value)
+// {
+// 	if (std::stold(value) < std::numeric_limits<T>::min())
+// 		throw MasterOperator::StackException(UnderFlow);
+// 	if (std::stold(value) > std::numeric_limits<T>::max())
+// 		throw MasterOperator::StackException(OverFlow);
+// }
+
+// template <typename T>
+// void			CheckFlowFloat(T value)
+// {
+// 	if (std::stold(value) < std::numeric_limits<T>::min())
+// 		throw MasterOperator::StackException(UnderFlow);
+// 	if (std::stold(value) > std::numeric_limits<T>::max())
+// 		throw MasterOperator::StackException(OverFlow);
+// }
+
 IOperand const* FactoryOperator::createInt8( std::string const   & value ) const
 {
-	/* Checking value */
+	if (std::stol(value) < std::numeric_limits<int8_t>::min())
+		throw MasterOperator::StackException(UnderFlow);
+	if (std::stol(value) > std::numeric_limits<int8_t>::max())
+		throw MasterOperator::StackException(OverFlow);
 	return (new class Int8(std::stoi(value)));
 }
 
 IOperand const* FactoryOperator::createInt16( std::string const  & value ) const
 {
-	/* Checking value */
+	if (std::stol(value) < std::numeric_limits<int16_t>::min())
+		throw MasterOperator::StackException(UnderFlow);
+	if (std::stol(value) > std::numeric_limits<int16_t>::max())
+		throw MasterOperator::StackException(OverFlow);
 	return (new class Int16(std::stoi(value)));
 }
 
 IOperand const* FactoryOperator::createInt32( std::string const  & value ) const
 {
-	/* Checking value */
+	if (std::stol(value) < std::numeric_limits<int32_t>::min())
+		throw MasterOperator::StackException(UnderFlow);
+	if (std::stol(value) > std::numeric_limits<int32_t>::max())
+		throw MasterOperator::StackException(OverFlow);
 	return (new class Int32(std::stoi(value)));
 }
 
 IOperand const* FactoryOperator::createFloat( std::string const  & value ) const
 {
-	/* Checking value */
+	if (std::stold(value) < std::numeric_limits<float>::min())
+		throw MasterOperator::StackException(UnderFlow);
+	if (std::stold(value) > std::numeric_limits<float>::max())
+		throw MasterOperator::StackException(OverFlow);
 	return (new class Float(std::stof(value)));
 }
 
 IOperand const* FactoryOperator::createDouble( std::string const & value ) const
 {
-	/* Checking value */
+	if (std::stold(value) < std::numeric_limits<double>::min())
+		throw MasterOperator::StackException(UnderFlow);
+	if (std::stold(value) > std::numeric_limits<double>::max())
+		throw MasterOperator::StackException(OverFlow);
 	return (new class Double(std::stod(value)));
 }
 

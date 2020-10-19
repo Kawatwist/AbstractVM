@@ -17,17 +17,19 @@
 extern FactoryOperator Factory;
 extern MasterOperator Manager;
 
+
 void           OP_push(const IOperand* toPush)
 {
     Manager._list.emplace_front(toPush);
-    // delete toPush;
 }
 
 void           OP_pop(const IOperand*)
 {
     if (Manager._list.empty() == true)
         throw (MasterOperator::StackException(EmptyStack));
+    const IOperand* v1 = Manager._list.front();
     Manager._list.pop_front();
+    delete v1;
 }
 
 void           OP_dump(const IOperand*)
@@ -44,7 +46,6 @@ void           OP_assert(const IOperand* toCmp)
     auto current = Manager._list.front();
     if (toCmp->toString().compare(current->toString()))
         throw (MasterOperator::StackException(AssertNotTrue));
-    // delete toCmp;
 }
 
 void           OP_add(const IOperand*)
@@ -58,6 +59,8 @@ void           OP_add(const IOperand*)
     std::cout << v2->toString() << std::endl;
 	IOperand* r = const_cast<IOperand*>(*v2 + *v1);
     OP_push(r);
+    delete v1;
+    delete v2;
 }
 
 void           OP_sub(const IOperand*)
@@ -71,6 +74,8 @@ void           OP_sub(const IOperand*)
     std::cout << v2->toString() << std::endl;
 	IOperand* r = const_cast<IOperand*>(*v2 - *v1);
     OP_push(r);
+    delete v1;
+    delete v2;
 }
 
 void           OP_mul(const IOperand*)
@@ -84,6 +89,8 @@ void           OP_mul(const IOperand*)
     std::cout << v2->toString() << std::endl;
 	IOperand* r = const_cast<IOperand*>(*v2 * *v1);
     OP_push(r);
+    delete v1;
+    delete v2;
 }
 
 void           OP_div(const IOperand*)
@@ -97,6 +104,8 @@ void           OP_div(const IOperand*)
     std::cout << v2->toString() << std::endl;
 	IOperand* r = const_cast<IOperand*>(*v2 / *v1);
     OP_push(r);
+    delete v1;
+    delete v2;
 }
 
 void           OP_mod(const IOperand*)
@@ -110,6 +119,8 @@ void           OP_mod(const IOperand*)
     std::cout << v2->toString() << std::endl;
 	IOperand* r = const_cast<IOperand*>(*v2 % *v1);
     OP_push(r);
+    delete v1;
+    delete v2;
 }
 
 void           OP_print(const IOperand*)
@@ -117,7 +128,7 @@ void           OP_print(const IOperand*)
     if (Manager._list.empty() == true)
         throw (MasterOperator::StackException(EmptyStack));
     auto current = Manager._list.front();
-    std::cout << current->getType() << " <= " << current->toString() << std::endl;
+    std::cout << static_cast<char>(std::stoi(current->toString())) << std::endl;
 }
 
 void           OP_exit(const IOperand*)
