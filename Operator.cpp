@@ -140,7 +140,7 @@ void           OP_printf(const IOperand*)
     auto current = Manager._list.front();
     if (current->getType() >= Float)
     {
-        // std::cout << std::setprecision(current->getPrecision()) << std::stof(current->toString());
+        std::cout << WHITE << std::setprecision(current->getPrecision()) << std::stof(current->toString());
         if (c_flg)
             std::cout << std::endl;
     }
@@ -155,7 +155,7 @@ void           OP_print(const IOperand*)
     auto current = Manager._list.front();
     if (current->getType() == Int8)
     {
-        std::cout << static_cast<char>(std::stoi(current->toString()));
+        std::cout << WHITE << static_cast<char>(std::stoi(current->toString()));
         if (c_flg)
             std::cout << std::endl;
     }

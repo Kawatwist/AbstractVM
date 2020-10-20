@@ -12,6 +12,7 @@ push int8(108) ; l
 push int8(101) ; e
 push int8(104) ; h
 ; Set Maj
+dump
 push int8(32)
 sub
 assert int8(72)
@@ -120,6 +121,23 @@ pop
 push float(3) ;
 push float(3) ; 3 * 3 
 mul
+printf
+pop
+;Stack Clear
+push int8(10) ; \n
+print
+pop
+push float(20)
+printf
+push int8(37) ; %
+print
+pop
+push float(3.14159)
+printf
+push int8(61) ; =
+print
+pop
+mod
 printf
 pop
 ;Stack Clear

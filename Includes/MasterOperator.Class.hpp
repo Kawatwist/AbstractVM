@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/19 16:59:11 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/20 14:00:40 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum ExceptionStack
         AssertNotTrue = 7,
         ArithmeticError = 8,
         PrintNonAscii = 9,
-        PrintNonFloat = 9,
+        PrintNonFloat = 10,
 }       t_ExceptionStack;
 
 /* Opcode */
