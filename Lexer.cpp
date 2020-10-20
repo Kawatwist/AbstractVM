@@ -263,6 +263,12 @@ int    Lexer::launchManager()
             if (c_flg)
                 std::cout << RED << std::endl;
             std::cerr << e.what() << WHITE << std::endl;
+            while (!Manager._list.empty())
+            {
+                auto curr = Manager._list.front();
+                Manager._list.pop_front();
+                delete curr;
+            }
             return (1);
         }
     }
@@ -272,6 +278,7 @@ int    Lexer::launchManager()
         Manager._list.pop_front();
         delete curr;
     }
+    std::cout << Manager._list.size() << std::endl;
     return (0);
 }
 

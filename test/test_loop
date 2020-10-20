@@ -1,0 +1,7 @@
+push int8(5) ; nb_cycle for loop
+loop int8(2) ; loop on 3 instruction
+push int8(33) ; !
+print
+pop
+;   "!!!!!"
+exit

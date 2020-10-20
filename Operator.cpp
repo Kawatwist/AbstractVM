@@ -44,11 +44,17 @@ void           OP_dump(const IOperand*)
 void           OP_assert(const IOperand* toCmp)
 {
     if (Manager._list.empty() == true)
+    {
+        delete toCmp;
         throw (MasterOperator::StackException(EmptyStack));
+    }
     Manager._list.begin();
     auto current = Manager._list.front();
     if (toCmp->toString().compare(current->toString()) && toCmp->getType() == current->getType())
+    {
+        delete toCmp;
         throw (MasterOperator::StackException(AssertNotTrue));
+    }
 }
 
 void           OP_add(const IOperand*)
@@ -133,7 +139,7 @@ void           OP_printf(const IOperand*)
     auto current = Manager._list.front();
     if (current->getType() >= Float)
     {
-        std::cout << std::setprecision(current->getPrecision()) << std::stof(current->toString());
+        // std::cout << std::setprecision(current->getPrecision()) << std::stof(current->toString());
         if (c_flg)
             std::cout << std::endl;
     }
