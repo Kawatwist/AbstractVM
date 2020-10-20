@@ -257,6 +257,8 @@ int    Lexer::launchManager()
             if (c_flg)
                 std::cout << WHITE << std::endl;
             function_map[v->tok] (op);
+            if (!v->tok.compare("exit"))
+                break ;
         }
         catch(const std::exception& e)
         {
@@ -278,7 +280,6 @@ int    Lexer::launchManager()
         Manager._list.pop_front();
         delete curr;
     }
-    std::cout << Manager._list.size() << std::endl;
     return (0);
 }
 

@@ -55,6 +55,7 @@ void           OP_assert(const IOperand* toCmp)
         delete toCmp;
         throw (MasterOperator::StackException(AssertNotTrue));
     }
+    delete toCmp;
 }
 
 void           OP_add(const IOperand*)
