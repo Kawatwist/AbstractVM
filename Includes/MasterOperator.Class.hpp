@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 15:38:33 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/20 14:00:40 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/20 14:11:04 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum ExceptionStack
         ArithmeticError = 8,
         PrintNonAscii = 9,
         PrintNonFloat = 10,
+        UndefinedFlow = 11,
 }       t_ExceptionStack;
 
 /* Opcode */
@@ -81,11 +82,12 @@ class MasterOperator
                 StackException(int n) : _Error(n) {};
                 virtual const char * what() const throw() {return (this->tab[this->_Error]);};
             private :
-                const char tab[11][25] = {"EmptyStack", "StackException",
+                const char tab[12][25] = {"EmptyStack", "StackException",
                     "OverFlowValue", "UnderFlowValue",
                     "Divide/Modulo by 0", "ProgramDontExit",
                     "UnknowInstruction", "AssertNotTrue",
-                    "ArithmeticWithLessThan2", "PrintNonAscii", "PrintNonFloat"};
+                    "ArithmeticWithLessThan2", "PrintNonAscii", "PrintNonFloat"
+                    , "OverFlow/UnderFlow"};
                 int _Error;
         };
         bool                        exited = false;

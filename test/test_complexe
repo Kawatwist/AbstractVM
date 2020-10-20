@@ -12,7 +12,6 @@ push int8(108) ; l
 push int8(101) ; e
 push int8(104) ; h
 ; Set Maj
-dump
 push int8(32)
 sub
 assert int8(72)

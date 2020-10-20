@@ -6,7 +6,7 @@
 /*   By: lomasse <lomasse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:00:19 by lomasse           #+#    #+#             */
-/*   Updated: 2020/10/19 15:29:29 by lomasse          ###   ########.fr       */
+/*   Updated: 2020/10/20 14:11:37 by lomasse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ IOperand const* FactoryOperator::createInt8( std::string const   & value ) const
 {
 	try { std::stoi(value); }
 	catch (std::exception &)
-		{ throw MasterOperator::StackException(OverFlow); }
+		{ throw MasterOperator::StackException(UndefinedFlow); }
 	if (std::stol(value) < std::numeric_limits<int8_t>::min())
 		throw MasterOperator::StackException(UnderFlow);
 	if (std::stol(value) > std::numeric_limits<int8_t>::max())
@@ -63,7 +63,7 @@ IOperand const* FactoryOperator::createInt16( std::string const  & value ) const
 {
 	try { std::stoi(value); }
 	catch (std::exception &)
-		{ throw MasterOperator::StackException(OverFlow); }
+		{ throw MasterOperator::StackException(UndefinedFlow); }
 	if (std::stol(value) < std::numeric_limits<int16_t>::min())
 		throw MasterOperator::StackException(UnderFlow);
 	if (std::stol(value) > std::numeric_limits<int16_t>::max())
@@ -75,7 +75,7 @@ IOperand const* FactoryOperator::createInt32( std::string const  & value ) const
 {
 	try { std::stoi(value); }
 	catch (std::exception &)
-		{ throw MasterOperator::StackException(OverFlow); }
+		{ throw MasterOperator::StackException(UndefinedFlow); }
 	if (std::stol(value) < std::numeric_limits<int32_t>::min())
 		throw MasterOperator::StackException(UnderFlow);
 	if (std::stol(value) > std::numeric_limits<int32_t>::max())
@@ -87,7 +87,7 @@ IOperand const* FactoryOperator::createFloat( std::string const  & value ) const
 {
 	try { std::stof(value); }
 	catch (std::exception &)
-		{ throw MasterOperator::StackException(OverFlow); }
+		{ throw MasterOperator::StackException(UndefinedFlow); }
 	if (std::stold(value) < std::numeric_limits<float>::min())
 		throw MasterOperator::StackException(UnderFlow);
 	if (std::stold(value) > std::numeric_limits<float>::max())
@@ -99,7 +99,7 @@ IOperand const* FactoryOperator::createDouble( std::string const & value ) const
 {
 	try { std::stod(value); }
 	catch (std::exception &)
-		{ throw MasterOperator::StackException(OverFlow); }
+		{ throw MasterOperator::StackException(UndefinedFlow); }
 	if (std::stold(value) < std::numeric_limits<double>::min())
 		throw MasterOperator::StackException(UnderFlow);
 	if (std::stold(value) > std::numeric_limits<double>::max())
